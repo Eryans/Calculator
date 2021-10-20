@@ -27,7 +27,7 @@ btnDel.addEventListener("click",function(){
 buttonsFunc.forEach( x => x.addEventListener("click",function(){
     previousvalue += parseFloat(textArea.value);
     textArea.value = "";
-    textArea.placeholder = previousvalue;
+    // textArea.placeholder = previousvalue; 
     operationToDo = this.value;
 }));
 
