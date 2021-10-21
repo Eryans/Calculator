@@ -2,10 +2,9 @@ const buttonsNum = document.querySelectorAll(".btnNumber");
 const buttonsFunc = document.querySelectorAll(".btnFunc");
 const textArea = document.querySelector("#calculus");
 const btnDel = document.querySelector(".btnDel");
-window.onload = () => textArea.value = "";
+window.onload = function(){textArea.value = ""; textArea.placeholder = "";};
 let operationToDo = "";
 let calculus = "";
-let newValue = 0;
 
 buttonsNum.forEach( x => x.addEventListener("click",function(){textArea.value += this.value; calculus += this.value}) );
 
@@ -14,6 +13,7 @@ btnDel.addEventListener("click",function(){
         let str = textArea.value.toString().split("");
         str.pop();
         textArea.value = str.join("");
+        textArea.placeholder = str.join("");
     }
 });
 buttonsFunc.forEach( x => x.addEventListener("click",function(){
