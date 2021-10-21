@@ -6,7 +6,11 @@ window.onload = function(){textArea.value = ""; textArea.placeholder = "";};
 let operationToDo = "";
 let calculus = "";
 
-buttonsNum.forEach( x => x.addEventListener("click",function(){textArea.value += this.value; calculus += this.value}) );
+buttonsNum.forEach( x => x.addEventListener("click",function(){
+    textArea.value += this.value; 
+    calculus += this.value; 
+    buttonsFunc.forEach(x => x.classList.remove("disabled"));
+}) );
 
 btnDel.addEventListener("click",function(){
     if (textArea.value.length > -1){
@@ -19,6 +23,7 @@ btnDel.addEventListener("click",function(){
 buttonsFunc.forEach( x => x.addEventListener("click",function(){
     textArea.value = "";
     textArea.placeholder = eval(calculus);
+    buttonsFunc.forEach(x => x.value != "Reset" ? x.classList.add("disabled") : false);
     switch (this.value){
         case "Add" :
             calculus += "+";
