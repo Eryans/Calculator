@@ -3,53 +3,47 @@ const buttonsFunc = document.querySelectorAll(".btnFunc");
 const textArea = document.querySelector("#calculus");
 const btnReset = document.querySelector(".btnReset");
 const btnDel = document.querySelector(".btnDel");
-const btnResult = document.querySelector(".btnResult");
 
 let operationToDo = "";
-let previousvalue = 0;
+let calculus = "";
 let newValue = 0;
 
 window.onload = () => textArea.value = "";
 
-buttonsNum.forEach( x => x.addEventListener("click",function(){textArea.value += this.value}) );
+buttonsNum.forEach( x => x.addEventListener("click",function(){textArea.value += this.value; calculus += this.value}) );
 
 btnReset.addEventListener("click",function(){
     textArea.value = "";
-    previousvalue = 0;
     textArea.placeholder = "";
+    calculus = "";
 });
 btnDel.addEventListener("click",function(){
     if (textArea.value.length > -1){
         let str = textArea.value.toString().split("");
         str.pop();
         textArea.value = str.join("");
-        textArea.placeholder = str.join("");
     }
 });
 buttonsFunc.forEach( x => x.addEventListener("click",function(){
-    previousvalue = parseFloat(textArea.value);
     textArea.value = "";
-    textArea.placeholder = previousvalue; 
-    operationToDo = this.value;
-}));
-
-btnResult.addEventListener("click",function(){
-    textArea.placeholder = previousvalue;
-    if (isNaN(parseFloat(textArea.value))){
-        textArea.value = 0;
-    } 
-    switch (operationToDo){
+    textArea.placeholder = eval(calculus);
+    switch (this.value){
         case "Add" :
-        textArea.value = parseFloat(previousvalue) + parseFloat(textArea.value);
+            calculus += "+";
         break;
         case "Minus" :
-        textArea.value = parseFloat(previousvalue) - parseFloat(textArea.value);
+            calculus += "-";
         break;
         case "Divide" :
-        textArea.value = parseFloat(previousvalue) / parseFloat(textArea.value);
+            calculus += "/";
         break;
         case "Multiply" :
-        textArea.value = parseFloat(previousvalue) * parseFloat(textArea.value);
+            calculus += "*";
+        break;
+        case "Result" :
+            textArea.value = eval(calculus);
         break;
     }
-});
+    let regex = /\d$/;
+    regex.test(calculus) ? textArea.value = eval(calculus) : false;
+}));
