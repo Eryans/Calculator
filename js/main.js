@@ -22,7 +22,8 @@ btnDel.addEventListener("click",function(){
     if (textArea.value.length > -1){
         let str = textArea.value.toString().split("");
         str.pop();
-        textArea.value = parseFloat(str.join(""));
+        textArea.value = str.join("");
+        textArea.placeholder = str.join("");
     }
 });
 buttonsFunc.forEach( x => x.addEventListener("click",function(){
@@ -33,7 +34,10 @@ buttonsFunc.forEach( x => x.addEventListener("click",function(){
 }));
 
 btnResult.addEventListener("click",function(){
-    textArea.placeholder = previousvalue; 
+    textArea.placeholder = previousvalue;
+    if (isNaN(parseFloat(textArea.value))){
+        textArea.value = 0;
+    } 
     switch (operationToDo){
         case "Add" :
         textArea.value = parseFloat(previousvalue) + parseFloat(textArea.value);
