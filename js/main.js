@@ -7,6 +7,7 @@ const btnResult = document.querySelector(".btnResult");
 
 let operationToDo = "";
 let previousvalue = 0;
+let newValue = 0;
 
 window.onload = () => textArea.value = "";
 
@@ -18,20 +19,21 @@ btnReset.addEventListener("click",function(){
     textArea.placeholder = "";
 });
 btnDel.addEventListener("click",function(){
-    if (textArea.value.length != 0){
+    if (textArea.value.length > -1){
         let str = textArea.value.toString().split("");
         str.pop();
         textArea.value = parseFloat(str.join(""));
     }
 });
 buttonsFunc.forEach( x => x.addEventListener("click",function(){
-    previousvalue += parseFloat(textArea.value);
+    previousvalue = parseFloat(textArea.value);
     textArea.value = "";
-    // textArea.placeholder = previousvalue; 
+    textArea.placeholder = previousvalue; 
     operationToDo = this.value;
 }));
 
 btnResult.addEventListener("click",function(){
+    textArea.placeholder = previousvalue; 
     switch (operationToDo){
         case "Add" :
         textArea.value = parseFloat(previousvalue) + parseFloat(textArea.value);
