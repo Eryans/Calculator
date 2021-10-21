@@ -35,10 +35,10 @@ buttonsFunc.forEach( x => x.addEventListener("click",function(){
             calculus += "-";
         break;
         case "Divide" :
-            calculus += "/";
+            calculus = eval(calculus) + "/";
         break;
         case "Multiply" :
-            calculus += "*";
+            calculus = eval(calculus) + "*";
         break;
         case "Result" :
             textArea.value = eval(calculus);
