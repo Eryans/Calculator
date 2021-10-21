@@ -1,22 +1,14 @@
 const buttonsNum = document.querySelectorAll(".btnNumber");
 const buttonsFunc = document.querySelectorAll(".btnFunc");
 const textArea = document.querySelector("#calculus");
-const btnReset = document.querySelector(".btnReset");
 const btnDel = document.querySelector(".btnDel");
-
+window.onload = () => textArea.value = "";
 let operationToDo = "";
 let calculus = "";
 let newValue = 0;
 
-window.onload = () => textArea.value = "";
-
 buttonsNum.forEach( x => x.addEventListener("click",function(){textArea.value += this.value; calculus += this.value}) );
 
-btnReset.addEventListener("click",function(){
-    textArea.value = "";
-    textArea.placeholder = "";
-    calculus = "";
-});
 btnDel.addEventListener("click",function(){
     if (textArea.value.length > -1){
         let str = textArea.value.toString().split("");
@@ -42,6 +34,11 @@ buttonsFunc.forEach( x => x.addEventListener("click",function(){
         break;
         case "Result" :
             textArea.value = eval(calculus);
+        break;
+        case "Reset":
+            textArea.value = "";
+            textArea.placeholder = "";
+            calculus = "";
         break;
     }
     let regex = /\d$/;
